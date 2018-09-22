@@ -1,0 +1,2 @@
+use_netty_dns_resolver: false
+log_initial_handler_connections: false

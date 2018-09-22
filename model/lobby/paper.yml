@@ -1,0 +1,32 @@
+config-version: 14
+settings:
+  enable-player-collisions: false
+  bungee-online-mode: false
+  save-player-data: false
+world-settings:
+  default:
+    disable-thunder: true
+    disable-ice-and-snow: true
+    game-mechanics:
+      disable-end-credits: true
+      disable-chest-cat-detection: false
+      scan-for-legacy-ender-dragon: false
+    armor-stands-do-collision-entity-lookups: false
+    optimize-explosions: true
+    queue-light-updates: true
+    use-chunk-inhabited-timer: false
+    frosted-ice:
+      enabled: false
+      delay:
+        min: 20
+        max: 40
+    max-entity-collisions: -1
+    grass-spread-tick-rate: -1
+    container-update-tick-rate: 3
+    mob-spawner-tick-rate: 20
+    armor-stands-tick: false
+    disable-teleportation-suffocation-check: true
+    enable-treasure-maps: false
+    filter-nbt-data-from-spawn-eggs-and-related: false
+    hopper:
+      disable-move-event: true

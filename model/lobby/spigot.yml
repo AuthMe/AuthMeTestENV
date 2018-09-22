@@ -1,0 +1,40 @@
+config-version: 11
+settings:
+  save-user-cache-on-stop-only: true
+  timeout-time: 60
+  restart-on-crash: false
+  restart-script: ./nope.sh
+  bungeecord: true
+  late-bind: true
+  user-cache-size: 0
+stats:
+  disable-saving: true
+advancements:
+  disable-saving: true
+world-settings:
+  default:
+    verbose: false
+    view-distance: 4
+    enable-zombie-pigmen-portal-spawns: false
+    zombie-aggressive-towards-villager: false
+    ticks-per:
+      hopper-transfer: 24
+      hopper-check: 24
+    hopper-amount: 3
+    growth:
+      cactus-modifier: -1
+      cane-modifier: -1
+      melon-modifier: -1
+      mushroom-modifier: -1
+      pumpkin-modifier: -1
+      sapling-modifier: -1
+      wheat-modifier: -1
+      netherwart-modifier: -1
+      vine-modifier: -1
+      cocoa-modifier: -1
+    entity-activation-range:
+      animals: 16
+      monsters: 16
+      misc: 12
+      tick-inactive-villagers: false
+    max-entity-collisions: -1

@@ -1,0 +1,8 @@
+settings:
+  allow-end: false
+  warn-on-overload: true
+  connection-throttle: -1
+  query-plugins: false
+  deprecated-verbose: default
+ticks-per:
+  autosave: 0
