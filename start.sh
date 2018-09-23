@@ -16,12 +16,13 @@ sudo mysql -e "CREATE DATABASE authmetest;"
 # Download stuff
 mkdir tmp
 cd tmp
+wget https://ci.codemc.org/job/sgdc3/job/DownloadScraper/lastSuccessfulBuild/artifact/target/downloadscraper-1.0-SNAPSHOT.jar
 wget https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar
 wget https://papermc.io/ci/view/WaterfallMC/job/Waterfall/lastSuccessfulBuild/artifact/Waterfall-Proxy/bootstrap/target/Waterfall.jar
-java -jar ../../downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeReloaded/" firstMatching "AuthMe-.*\SNAPSHOT.jar"
-java -jar ../../downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeBungee/" firstMatching "AuthMeBungee-.*\SNAPSHOT.jar"
+java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeReloaded/" firstMatching "AuthMe-.*\SNAPSHOT.jar"
+java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeBungee/" firstMatching "AuthMeBungee-.*\SNAPSHOT.jar"
 wget http://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/modules/ProtocolLib/target/ProtocolLib.jar
-java -jar ../../downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.lucko.me/view/LuckPerms/job/LuckPerms/" firstMatching "LuckPerms-Bukkit-.*\.jar"
+java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.lucko.me/view/LuckPerms/job/LuckPerms/" firstMatching "LuckPerms-Bukkit-.*\.jar"
 wget https://build.true-games.org/job/ProtocolSupport/lastSuccessfulBuild/artifact/target/ProtocolSupport.jar
 cd ..
 
