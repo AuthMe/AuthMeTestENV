@@ -3,27 +3,41 @@
 # Cache sudo credentials
 sudo echo
 
+# WSL screen hotfix
+if grep -q Microsoft /proc/version; then
+    sudo service screen-cleanup start
+fi
+
 # Prepare workdir
 rm -rf workdir
 mkdir workdir
 cd workdir
 
 # Prepare DB
-sudo service mysql start
-sudo mysql -e "DROP DATABASE authmetest;"
-sudo mysql -e "CREATE DATABASE authmetest;"
+if grep -q Microsoft /proc/version; then
+    echo Assuming mysql server is running on windows side
+    mysql -h 127.0.0.1 -u root -e "DROP DATABASE authmetest;"
+    mysql -h 127.0.0.1 -u root -e "CREATE DATABASE authmetest;"
+else
+    sudo service mysql start
+    mysql -u root -e "DROP DATABASE authmetest;"
+    mysql -u root -e "CREATE DATABASE authmetest;"
+fi
 
 # Download stuff
 mkdir tmp
 cd tmp
-wget https://ci.codemc.org/job/sgdc3/job/DownloadScraper/lastSuccessfulBuild/artifact/target/downloadscraper-1.0-SNAPSHOT.jar
-wget https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar
-wget https://papermc.io/ci/view/WaterfallMC/job/Waterfall/lastSuccessfulBuild/artifact/Waterfall-Proxy/bootstrap/target/Waterfall.jar
-java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeReloaded/" firstMatching "AuthMe-.*\SNAPSHOT.jar"
-java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeBungee/" firstMatching "AuthMeBungee-.*\SNAPSHOT.jar"
-wget http://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/modules/ProtocolLib/target/ProtocolLib.jar
-java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.lucko.me/view/LuckPerms/job/LuckPerms/" firstMatching "LuckPerms-Bukkit-.*\.jar"
-wget https://build.true-games.org/job/ProtocolSupport/lastSuccessfulBuild/artifact/target/ProtocolSupport.jar
+#wget --no-verbose --no-hsts --show-progress --trust-server-names https://ci.codemc.org/job/sgdc3/job/DownloadScraper/lastSuccessfulBuild/artifact/target/downloadscraper-1.0-SNAPSHOT.jar
+wget --no-verbose --no-hsts --show-progress --trust-server-names https://papermc.io/ci/job/Paper-1.13/lastSuccessfulBuild/artifact/paperclip.jar
+wget --no-verbose --no-hsts --show-progress --trust-server-names https://papermc.io/ci/view/WaterfallMC/job/Waterfall/lastSuccessfulBuild/artifact/Waterfall-Proxy/bootstrap/target/Waterfall.jar
+#java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeReloaded/" firstMatch "AuthMe-.*\SNAPSHOT.jar"
+#java -jar downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.codemc.org/job/AuthMe/job/AuthMeBungee/" firstMatch "AuthMeBungee-.*\SNAPSHOT.jar"
+wget --no-verbose --no-hsts --show-progress --trust-server-names https://ci.codemc.org/job/AuthMe/job/AuthMeReloaded/lastSuccessfulBuild/artifact/target/AuthMe-5.5.1-SNAPSHOT.jar
+wget --no-verbose --no-hsts --show-progress --trust-server-names https://ci.codemc.org/job/AuthMe/job/AuthMeBungee/lastSuccessfulBuild/artifact/target/AuthMeBungee-2.1.0-SNAPSHOT.jar
+wget --no-verbose --no-hsts --show-progress --trust-server-names http://ci.dmulloy2.net/job/ProtocolLib/lastSuccessfulBuild/artifact/modules/ProtocolLib/target/ProtocolLib.jar
+#java -jar ../downloadscraper-1.0-SNAPSHOT.jar ./ "https://ci.lucko.me/view/LuckPerms/job/LuckPerms/" firstMatch "LuckPerms-Bukkit-.*\.jar"
+wget --no-verbose --no-hsts --show-progress --trust-server-names https://ci.lucko.me/view/LuckPerms/job/LuckPerms/850/artifact/bukkit/build/libs/LuckPerms-Bukkit-4.3.74.jar
+wget --no-verbose --no-hsts --show-progress --trust-server-names https://build.true-games.org/job/ProtocolSupport/lastSuccessfulBuild/artifact/target/ProtocolSupport.jar
 cd ..
 
 # Prepare and start instances
